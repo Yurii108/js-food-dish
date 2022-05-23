@@ -38,7 +38,8 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    const deadline = '2022-05-31';
+    // Timer
+    const deadline = '2022-06-30';
 
     function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date()),
@@ -46,7 +47,7 @@ window.addEventListener('DOMContentLoaded', function () {
             hours = Math.floor(t / (1000 * 60 * 60) % 24),
             minutes = Math.floor((t / 1000 / 60) % 60),
             seconds = Math.floor((t / 1000) % 60);
-        console.log();
+
         return {
             'total': t,
             'days': days,
@@ -54,6 +55,15 @@ window.addEventListener('DOMContentLoaded', function () {
             'minutes': minutes,
             'seconds': seconds
         };
+
+    }
+
+    function getZero(num) {
+        if (10 > num && 0 <= num) {
+            return '0' + num;
+        } else {
+            return num;
+        }
     }
 
     function setClock(selector, endtime) {
@@ -69,15 +79,15 @@ window.addEventListener('DOMContentLoaded', function () {
         function updateClock() {
             const t = getTimeRemaining(endtime);
 
-            days.innerHTML = days.t;
-            hours.innerHTML = hours.t;
-            minutes.innerHTML = minutes.t;
-            seconds.innerHTML = seconds.t;
+            days.innerHTML = getZero(t.days);
+            hours.innerHTML = getZero(t.hours);
+            minutes.innerHTML = getZero(t.minutes);
+            seconds.innerHTML = getZero(t.seconds);
 
             if (t.total <= 0) {
                 clearInterval(timeInterval);
             }
         }
     }
-    console.log(setClock('.timer', deadline));
+    setClock('.timer', deadline);
 });
