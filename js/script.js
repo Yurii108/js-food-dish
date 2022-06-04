@@ -175,7 +175,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         render() {
             const element = document.createElement('div');
-            
+
             if (this.classes.length === 0) {
                 this.element = 'menu__item';
                 element.classList.add(this.element);
@@ -193,8 +193,7 @@ window.addEventListener('DOMContentLoaded', function () {
                             <div class="menu__item-total"><span>${this.prise}</span> грн/день</div>
                 </div>`;
             this.parent.append(element);
-
-
+            
         }
 
     }
@@ -230,4 +229,51 @@ window.addEventListener('DOMContentLoaded', function () {
         'big'
 
     ).render();
+
+    //form
+
+    const forms = document.querySelectorAll('form');
+
+    const message = {
+        loading:'Загрузка',
+        success:'Спасибо! Скоро мы с вами свяжемся',
+        failure:'Что-то пошло не так...'
+    };
+
+    forms.forEach(item => {
+        postData(item);
+    });
+
+    function postData(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const statusMessang = document.createElement('div');
+            statusMessang.classList.add('status');
+            statusMessang.textContent = message.loading;
+            form.append(statusMessang);
+
+
+            const request = new XMLHttpRequest();
+            request.open('POST', 'server.php');
+
+            // request.setRequestHeader('Content-type', 'multipart/form-data');
+            const formData = new FormData(form);
+
+            request.send(formData);
+
+            request.addEventListener('load', () => {
+                if (request.status === 200) {
+                    console.log(request.response);
+                    statusMessang.textContent = message.success;
+                    form.reset();
+                    setTimeout( () => {
+                        statusMessang.remove();
+                    }, 2000);
+                } else {
+                    statusMessang.textContent = message.failure;
+                }
+            });
+        });
+    }
 });
