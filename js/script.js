@@ -190,7 +190,7 @@ window.addEventListener('DOMContentLoaded', function () {
                             <div class="menu__item-total"><span>${this.prise}</span> грн/день</div>
                 </div>`;
             this.parent.append(element);
-            
+
         }
 
     }
@@ -231,9 +231,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const forms = document.querySelectorAll('form');
     const message = {
-        loading:'img/form/spinner.svg',
-        success:'Спасибо! Скоро мы с вами свяжемся',
-        failure:'Что-то пошло не так...'
+        loading: 'img/form/spinner.svg',
+        success: 'Спасибо! Скоро мы с вами свяжемся',
+        failure: 'Что-то пошло не так...'
     };
 
     forms.forEach(item => {
@@ -253,32 +253,28 @@ window.addEventListener('DOMContentLoaded', function () {
 
             form.insertAdjacentElement('afterend', statusMessang);
 
-
-            const request = new XMLHttpRequest();
-            request.open('POST', 'server.php');
-
-            request.setRequestHeader('Content-type', 'application/json');
             const formData = new FormData(form);
 
             const object = {};
-            formData.forEach( function(value, key) {
+            formData.forEach(function (value, key) {
                 object[key] = value;
             });
 
-            const json = JSON.stringify(object);
-
-            request.send(json);
-
-            request.addEventListener('load', () => {
-                if (request.status === 200) {
-                    console.log(request.response);
+            fetch('server1.php', {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(object)
+            })
+                .then(data => data.text())
+                .then(data => {
+                    console.log(data);
                     showThanksModal(message.success);
-                    form.reset();
                     statusMessang.remove();
-                } else {
+                }).catch(() => {
                     showThanksModal(message.failure);
-                }
-            });
+                }).finally(() => {
+                    form.reset();
+                });
         });
     }
 
@@ -297,7 +293,6 @@ window.addEventListener('DOMContentLoaded', function () {
         </div>
         `;
 
-        
         document.querySelector('.modal').append(thanksModal);
         setTimeout(() => {
             thanksModal.remove();
@@ -306,5 +301,4 @@ window.addEventListener('DOMContentLoaded', function () {
             closeModal();
         }, 4000);
     }
-
 });
