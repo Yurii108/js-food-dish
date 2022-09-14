@@ -184,10 +184,10 @@ function cards() {
       this.parent.append(element);
     }
 
-  } // getResource('http://localhost:3000/menu')
+  }
 
-
-  (0,_services_services__WEBPACK_IMPORTED_MODULE_0__.getResource)('https://raw.githubusercontent.com/Yurii108/Food_Dish/main/db.json/menu').then(data => {
+  (0,_services_services__WEBPACK_IMPORTED_MODULE_0__.getResource)('https://raw.githubusercontent.com/Yurii108/js-food-dish/main/db.json/menu') // getResource('http://localhost:3000/menu')
+  .then(data => {
     data.forEach(_ref => {
       let {
         img,
@@ -1996,7 +1996,7 @@ window.addEventListener('DOMContentLoaded', function () {
     field: '.offer__slider-inner'
   });
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_6__["default"])('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
-  (0,_modules_timer__WEBPACK_IMPORTED_MODULE_7__["default"])('.timer', '2022-06-30');
+  (0,_modules_timer__WEBPACK_IMPORTED_MODULE_7__["default"])('.timer', '2022-11-30');
 });
 })();
 

@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', function () {
         field: '.offer__slider-inner'
     });
     tabs('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
-    timer('.timer', '2022-06-30');
+    timer('.timer', '2022-11-30');
 
 
 });

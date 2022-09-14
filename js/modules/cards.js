@@ -1,4 +1,4 @@
-import {getResource} from '../services/services';
+import { getResource } from '../services/services';
 
 function cards() {
     // Используем классы для создание карточек меню
@@ -41,13 +41,12 @@ function cards() {
                         <div class="menu__item-total"><span>${this.prise}</span> грн/день</div>
             </div>`;
             this.parent.append(element);
-
         }
-
     }
 
-    // getResource('http://localhost:3000/menu')
+
     getResource('https://raw.githubusercontent.com/Yurii108/js-food-dish/main/db.json/menu')
+    // getResource('http://localhost:3000/menu')
         .then(data => {
             data.forEach(({ img, altimg, title, descr, price }) => {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
