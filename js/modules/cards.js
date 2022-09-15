@@ -44,9 +44,8 @@ function cards() {
         }
     }
 
-
-    getResource('https://raw.githubusercontent.com/Yurii108/js-food-dish/main/db.json/menu')
     // getResource('http://localhost:3000/menu')
+    getResource('https://6304aa4694b8c58fd7225d37.mockapi.io/diches')
         .then(data => {
             data.forEach(({ img, altimg, title, descr, price }) => {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
