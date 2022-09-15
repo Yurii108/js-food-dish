@@ -184,10 +184,10 @@ function cards() {
       this.parent.append(element);
     }
 
-  }
+  } // getResource('http://localhost:3000/menu')
 
-  (0,_services_services__WEBPACK_IMPORTED_MODULE_0__.getResource)('https://raw.githubusercontent.com/Yurii108/js-food-dish/main/db.json/menu') // getResource('http://localhost:3000/menu')
-  .then(data => {
+
+  (0,_services_services__WEBPACK_IMPORTED_MODULE_0__.getResource)('https://6304aa4694b8c58fd7225d37.mockapi.io/diches').then(data => {
     data.forEach(_ref => {
       let {
         img,
